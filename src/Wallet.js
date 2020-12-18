@@ -5,19 +5,20 @@ export default class Wallet extends Component {
     super(props)
     this.state = {
       balance: 100000,
+      message: '',
     }
   }
 
   handleBuy = (productName, productPrice) => {
     if (this.state.balance >= productPrice) {
-      console.log(`Bought ${productName} Rp ${productPrice}`)
       this.setState({
         balance: this.state.balance - productPrice,
+        message: `Bought ${productName} Rp ${productPrice}`,
       })
     } else {
-      console.log(
-        `Insufficient balance to buy ${productName} for Rp ${productPrice}`
-      )
+      this.setState({
+        message: `Insufficient balance to buy ${productName} for Rp ${productPrice}`,
+      })
     }
   }
 
@@ -40,6 +41,7 @@ export default class Wallet extends Component {
         >
           Buy Bottled Tea
         </button>
+        <p>Message: {this.state.message}</p>
       </div>
     )
   }
